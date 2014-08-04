@@ -1,7 +1,7 @@
 {
   "name": "ractive",
   "description": "Next-generation DOM manipulation",
-  "version": "0.5.5",
+  "version": "0.5.5-mrobb",
   "homepage": "http://ractivejs.org",
   "main": "ractive.js",
   "keywords": [

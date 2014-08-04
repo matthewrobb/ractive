@@ -3,19 +3,19 @@ module.exports = function ( grunt ) {
 	'use strict';
 
 	grunt.registerTask( 'buildTests', [
-		'clean:tests',
-		'copy:testModules',
-		'copy:testIndex'
+		//'clean:tests',
+		//'copy:testModules',
+		//'copy:testIndex'
 	]);
 
 	grunt.registerTask( 'test', [
-		'build',
-		'runTests'
+		//'build',
+		//'runTests'
 	]);
 
 	grunt.registerTask( 'runTests', [
-		'nodeunit',
-		'qunit:all'
+		//'nodeunit',
+		//'qunit:all'
 	]);
 
 };
