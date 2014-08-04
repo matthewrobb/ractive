@@ -6,6 +6,8 @@ import createEventHandlers from 'virtualdom/items/Element/prototype/init/createE
 import Decorator from 'virtualdom/items/Element/Decorator/_Decorator';
 import bubbleSelect from 'virtualdom/items/Element/special/select/bubble';
 import initOption from 'virtualdom/items/Element/special/option/init';
+import getComponent from 'virtualdom/items/Component/getComponent';
+import Component from 'virtualdom/items/Component/_Component';
 
 import circular from 'circular';
 
@@ -20,7 +22,8 @@ export default function Element$init ( options ) {
 		template,
 		ractive,
 		binding,
-		bindings;
+		bindings,
+		Custom;
 
 	this.type = types.ELEMENT;
 
@@ -50,13 +53,22 @@ export default function Element$init ( options ) {
 	this.attributes = createAttributes( this, template.a );
 
 	// append children, if there are any
-	if ( template.f ) {
+	if( ( Custom = getComponent( options.parentFragment.root, options.template.e ) ) || template.f ) {
 		this.fragment = new Fragment({
-			template: template.f,
+			template: Custom ? [] : template.f,
 			root:     ractive,
 			owner:    this,
-			pElement: this,
+			pElement: this
 		});
+
+		if(Custom) {
+			this.fragment.items.push( new Component( {
+				template:       template,
+				parentFragment: this.fragment,
+				index:          0,
+				pElement:       this
+			}, Custom ) );
+		}
 	}
 
 	// create twoway binding
